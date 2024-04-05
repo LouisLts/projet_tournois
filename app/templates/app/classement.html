@@ -1,0 +1,6 @@
+<h1>Classement du tournoi {{ tournoi.nom }}</h1>
+<ol>
+{% for participant, nb_victoires in classement %}
+    <li>{{ participant.nom }} - Victoires : {{ nb_victoires }}</li>
+{% endfor %}
+</ol>

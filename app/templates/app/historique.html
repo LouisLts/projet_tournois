@@ -1,0 +1,6 @@
+<h1>Historique des matchs du tournoi {{ tournoi.nom }}</h1>
+<ul>
+{% for match in matchs %}
+    <li>{{ match.participant1 }} vs {{ match.participant2 }} : {{ match.score1 }} - {{ match.score2 }} (Gagnant : {{ match.gagnant }})</li>
+{% endfor %}
+</ul>

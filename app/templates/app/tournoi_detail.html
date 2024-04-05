@@ -1,0 +1,37 @@
+<h1>{{ tournoi.nom }}</h1>
+<p>Date début : {{ tournoi.date_debut }}</p>
+<p>Date fin : {{ tournoi.date_fin }}</p>
+
+<h2>Participants</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form_participant.as_p }}
+    <button type="submit">Ajouter un participant</button>
+</form>
+<ul>
+{% for participant in participants %}
+    <li>
+        {{ participant.nom }}
+        <a href="{% url 'supprimer_participant' tournoi.id participant.id %}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce participant ?')">Supprimer</a>
+    </li>
+{% endfor %}
+</ul>
+
+<h2>Matchs</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form_match.as_p }}
+    <button type="submit">Ajouter un match</button>
+</form>
+<ul>
+{% for match in matchs %}
+    <li>
+        {{ match.participant1 }} vs {{ match.participant2 }} : {{ match.score1 }} - {{ match.score2 }} (Gagnant : {{ match.gagnant }})
+        <a href="{% url 'supprimer_match' tournoi.id match.id %}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce match ?')">Supprimer</a>
+        <a href="{% url 'modifier_match' tournoi.id match.id %}">Modifier</a>
+    </li>
+{% endfor %}
+</ul>
+
+<p><a href="{% url 'classement' tournoi.id %}">Voir le classement</a></p>
+<p><a href="{% url 'historique' tournoi.id %}">Voir l'historique des matchs</a></p>

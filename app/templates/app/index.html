@@ -1,0 +1,16 @@
+<h1>Liste des tournois</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Créer un tournoi</button>
+</form>
+
+<ul>
+{% for tournoi in tournois %}
+    <li>
+        <a href="{% url 'tournoi_detail' tournoi.id %}">{{ tournoi.nom }}</a>
+        <a href="{% url 'supprimer_tournoi' tournoi.id %}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tournoi ?')">Supprimer</a>
+    </li>
+{% endfor %}
+</ul>
